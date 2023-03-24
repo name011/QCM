@@ -12,7 +12,7 @@ using namespace std;
                 "-lpugixml"  
 Dans le args[...]
 */
-string tab2[3],fichier = "/home/soko/Documents/GitHub/tp4-name011-1/qcm.xml", reponseR = "";
+string tab2[3],fichier = "/home/soko/Documents/GitHub/QCM/qcm.xml", reponseR = "";
 
 int main(){
 do {
