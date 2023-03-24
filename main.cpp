@@ -83,8 +83,8 @@ do {
             cin >> reponse;
             transform (reponse.begin(), reponse.end(), reponse.begin(), ::tolower); // convertir la réponse en minuscule
             //verifie si la reponse saisie est correcte avec la réponse attendu dans le fichier xml
-            // ou si la reponse saisie est le chiffre correspondant à la réponse attendu dans le fichier xml
-            if (reponse == question.child("reponse").child_value() || reponse == to_string(answer_indices[0] + 1)){
+            
+            if (reponse == question.child("reponse").child_value()){
                 cout << "\033[32m" << "Bonne réponse" << "\033[0m" << endl;
                 points++;
             }
