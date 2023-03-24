@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<qcm>
+    <question>
+        <enonce>Quelle est la capitale de la France ??</enonce>
+        <choix>
+            <option>berlin</option>
+            <option>Paris</option>
+            <option>londres</option>
+            <option>madrid</option>
+        </choix>
+        <reponse>paris</reponse>
+    </question>
+    <question>
+        <enonce> Couleur</enonce>
+        <choix>
+            <option>Michel-Ange</option>
+            <option>Leonardo Da Vinci</option>
+            <option>Rembrandt</option>
+            <option>blanc</option>
+        </choix>
+        <reponse>blanc</reponse>
+    </question>
+    <question>
+        <enonce>prénom</enonce>
+        <choix>
+            <option>Le Nil</option>
+            <option>Le Danube</option>
+            <option>Le Mississippi</option>
+            <option>Luc</option>
+        </choix>
+        <reponse>luc</reponse>
+    </question>
+</qcm>
