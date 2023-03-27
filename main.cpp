@@ -4,7 +4,9 @@
 #include <cstring>
 #include <algorithm>
 #include <ctime>
+#include <fstream>
 using namespace std;
+using std::cerr; //ne pas oublier le std:: devant la fonction
 //pour ajouter correctement la bibliothèque pugixml il faut modifier le task.json en rajoutant : 
 /*
                 "-L",
@@ -12,20 +14,30 @@ using namespace std;
                 "-lpugixml"  
 Dans le args[...]
 */
-string tab2[3],fichier = "/home/soko/Documents/GitHub/tp4-name011-1/qcm.xml", reponseR = "";
-
+string tab2[3], reponseR = "";
+string const Fichierlog ="/home/soko/Documents/GitHub/tp4-name011-1/log.txt", fichier = "/home/soko/Documents/GitHub/tp4-name011-1/qcm.xml";
 int main(){
 do {
+    ofstream fiichierlog(Fichierlog.c_str(), ios::out | ios::trunc);// ne peut pas avoir le même nom faire attention
     int points = 0;
     pugi::xml_document doc;
     if (!doc.load_file(fichier.c_str())){ /* /!\ ne pas oublier le .c_str */
-        cout << "Error: " << doc.load_file(fichier.c_str()).description() << endl;
+        cerr << "Error: " << doc.load_file(fichier.c_str()).description() << endl;
         return 1;
     }
     else{
         cout << "XML file loaded successfully" << endl;
     }
-
+    // ouvre le fichier log
+    ofstream fichierlog(Fichierlog.c_str(), ios::out | ios::app);
+    if(fichierlog)
+    {
+        cout << "log file loaded successfully" << endl;
+    }
+    else
+    {
+        cerr << "Impossible d'ouvrir le fichier !" << endl;
+    }
     // prendre ce qui y a dans le fichier xml
     pugi::xml_node qcm = doc.child("qcm");
     pugi::xml_node question = qcm.child("question");
@@ -79,7 +91,7 @@ do {
             
         }
             string reponse;
-            cout <<"\033[35m"<< "\n"<<"Votre reponse : "<<"\033[0m";
+            cout <<"\033[35m"<< "\n"<<"Votre réponse : "<<"\033[0m";
             cin >> reponse;
             transform (reponse.begin(), reponse.end(), reponse.begin(), ::tolower); // convertir la réponse en minuscule
             //verifie si la reponse saisie est correcte avec la réponse attendu dans le fichier xml
@@ -89,9 +101,35 @@ do {
                 points++;
             }
             else{
-                cout << "\033[31m"<< "Mauvaise reponse" <<"\033[0m"<< endl;
+                cout << "\033[31m"<< "Mauvaise réponse" <<"\033[0m"<< endl;
             }
-        } cout << "Vous avez " << points << " points" << endl;
+
+        // ouvre le fichier log.txt et écrit la question et la réponse saisie par l'utilisateur
+        fichierlog << "Question " << q_index + 1 << " : " << tab2[0] << endl;
+        fichierlog << "Votre reponse : " << reponse << endl;
+        fichierlog << "Bonne reponse : " << question.child("reponse").child_value() << endl;
+        fichierlog << "----------------------------------------" << endl;
+        }
+    }
+    cout << "voulez-vous consulter le fichier les réponses aux questions ? "<<"\033[0m" << endl;
+    string reponse2;
+    cin >> reponse2;
+    transform (reponse2.begin(), reponse2.end(), reponse2.begin(), ::tolower); // convertir la réponse en minuscule
+    if (reponse2 == "o"){
+        ifstream fichierlog(Fichierlog);
+        if (fichierlog){
+            string ligne;
+            while (getline(fichierlog, ligne)){
+                cout << ligne << endl;
+            }
+        }
+        else{
+            cout << "Impossible d'ouvrir le fichier log" << endl;
+        }
+        fichierlog.close();
+    }
+    else{
+        cout << "ok" << endl;
     }
     cout << "\033[33m"<<"==================== fin du qcm ===================="<<"\033[0m" << endl;// c'est BEAUW
     delete[] question_indices; //important ne pas oublier
