@@ -14,8 +14,13 @@ using std::cerr; //ne pas oublier le std:: devant la fonction
                 "-lpugixml"  
 Dans le args[...]
 */
+<<<<<<< HEAD
 string tab2[3], reponseR = "";
 string const Fichierlog ="/home/soko/Documents/GitHub/tp4-name011-1/log.txt", fichier = "/home/soko/Documents/GitHub/tp4-name011-1/qcm.xml";
+=======
+string tab2[3],fichier = "/home/soko/Documents/GitHub/QCM/qcm.xml", reponseR = "";
+
+>>>>>>> 6df39d79a627207208927bc0215cd33ae412e769
 int main(){
 do {
     ofstream fiichierlog(Fichierlog.c_str(), ios::out | ios::trunc);// ne peut pas avoir le même nom faire attention
@@ -95,8 +100,8 @@ do {
             cin >> reponse;
             transform (reponse.begin(), reponse.end(), reponse.begin(), ::tolower); // convertir la réponse en minuscule
             //verifie si la reponse saisie est correcte avec la réponse attendu dans le fichier xml
-            // ou si la reponse saisie est le chiffre correspondant à la réponse attendu dans le fichier xml
-            if (reponse == question.child("reponse").child_value() || reponse == to_string(answer_indices[0] + 1)){
+            
+            if (reponse == question.child("reponse").child_value()){
                 cout << "\033[32m" << "Bonne réponse" << "\033[0m" << endl;
                 points++;
             }
