@@ -15,7 +15,6 @@ using std::cerr; //ne pas oublier le std:: devant la fonction
 Dans le args[...]
 */
 
-string tab2[3], reponseR = "";
 string const Fichierlog ="/home/soko/Documents/GitHub/QCM/log.txt";
 =======
 string tab2[3],fichier = "/home/soko/Documents/GitHub/QCM/qcm.xml", reponseR = "";
